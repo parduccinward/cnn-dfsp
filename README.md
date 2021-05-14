@@ -1,11 +1,13 @@
 # Sistema Inteligente para la Clasificacion de Lesiones Cutaneas utilizando una CNN
 
-Este proyecto es alimentado por una base de datos alojada en AWS S3 de 260 Imagenes de lesiones de la piel, utilizando un notebook en Sagemaker AWS para el entrenamiento de una red neuronal convolucional. En este codigo se implementan la clasificacion de las siguientes enfermedades:
+Este proyecto es alimentado por 260 Imagenes de lesiones de la piel alojadas en AWS S3 utilizando un notebook en Sagemaker AWS para el entrenamiento de una red neuronal convolucional. En este codigo se implementan la clasificacion de las siguientes enfermedades:
 
 1. Lesiones benignas
 2. Carcinoma de Celulas Basales
-3. Dermatofibrosarcoma protuberans
+3. Dermatofibrosarcoma Protuberans
 4. Melanoma
+
+![Clasificacion de Lesiones Cutaneas via CNN](/assets/images/CNN_DFSP.png)
 
 # Tecnologias empleadas para el desarrollo del Sistema
 
