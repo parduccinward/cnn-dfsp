@@ -9,7 +9,7 @@ Este proyecto es alimentado por una base de datos alojada en AWS S3 de 260 Image
 
 # Tecnologias empleadas para el desarrollo del Sistema
 
-1. Entrenamiento:
+### Entrenamiento:
 
 - Python
 - Jupyter Notebooks
@@ -19,12 +19,12 @@ Este proyecto es alimentado por una base de datos alojada en AWS S3 de 260 Image
 - numpy
 - boto3
 
-2. Hosting del Modelo
+### Hosting del Modelo
 
 - AWS S3
 - AWS Sagemaker
 
-3. Desarrollo Web
+### Desarrollo Web
 
 - REACT
 - REACTjs
