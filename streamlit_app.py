@@ -2,7 +2,7 @@ from pyngrok import ngrok
 import streamlit as st
 import tensorflow as tf
 from img_classification import teachable_machine_classification
-import keras
+import tensorflow.keras
 from PIL import Image, ImageOps
 import numpy as np
 
