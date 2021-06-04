@@ -1,0 +1,83 @@
+Usage: streamlit run [OPTIONS] TARGET [ARGS]...
+
+Error: Invalid value: File does not exist: app.py
+2021-06-03 02:17:32.019910: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cudart64_110.dll
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://192.168.1.3:8501
+
+2021-06-03 02:17:35.664263: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library nvcuda.dll
+2021-06-03 02:17:35.697601: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
+pciBusID: 0000:06:00.0 name: NVIDIA GeForce GTX 1660 Ti computeCapability: 7.5
+coreClock: 1.86GHz coreCount: 24 deviceMemorySize: 6.00GiB deviceMemoryBandwidth: 268.26GiB/s
+2021-06-03 02:17:35.697851: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cudart64_110.dll
+2021-06-03 02:17:35.705809: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cublas64_11.dll
+2021-06-03 02:17:35.705852: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cublasLt64_11.dll
+2021-06-03 02:17:35.710914: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cufft64_10.dll
+2021-06-03 02:17:35.712550: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library curand64_10.dll
+2021-06-03 02:17:35.713959: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cusolver64_11.dll'; dlerror: cusolver64_11.dll not found
+2021-06-03 02:17:35.717850: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cusparse64_11.dll
+2021-06-03 02:17:35.718715: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library cudnn64_8.dll
+2021-06-03 02:17:35.718733: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1766] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2021-06-03 02:17:35.719369: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-06-03 02:17:35.720078: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1258] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-06-03 02:17:35.720097: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]      
+2021-06-03 02:17:36.222 Opening tunnel named: http-80-df24a867-567f-4ae1-a43a-8ce3666a8e1d
+2021-06-03 02:17:36.264 t=2021-06-03T02:17:36-0400 lvl=info msg="no configuration paths supplied"
+2021-06-03 02:17:36.265 t=2021-06-03T02:17:36-0400 lvl=info msg="using configuration at default config path" path=C:\\Users\\pardu/.ngrok2/ngrok.yml
+2021-06-03 02:17:36.265 t=2021-06-03T02:17:36-0400 lvl=info msg="open config file" path=C:\\Users\\pardu\\.ngrok2\\ngrok.yml err=nil
+2021-06-03 02:17:36.266 t=2021-06-03T02:17:36-0400 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040
+2021-06-03 02:17:36.958 t=2021-06-03T02:17:36-0400 lvl=info msg="tunnel session started" obj=tunnels.session
+2021-06-03 02:17:36.958 t=2021-06-03T02:17:36-0400 lvl=info msg="client session established" obj=csess id=15d63e0ddaa4
+2021-06-03 02:17:36.966 t=2021-06-03T02:17:36-0400 lvl=info msg=start pg=/api/tunnels id=72761b52e6752a7e
+2021-06-03 02:17:36.966 t=2021-06-03T02:17:36-0400 lvl=info msg=end pg=/api/tunnels id=72761b52e6752a7e status=200 dur=1.5755ms
+2021-06-03 02:17:36.967 t=2021-06-03T02:17:36-0400 lvl=info msg=start pg=/api/tunnels id=db4737748bbf8113
+2021-06-03 02:17:36.967 t=2021-06-03T02:17:36-0400 lvl=info msg=end pg=/api/tunnels id=db4737748bbf8113 status=200 dur=0s
+2021-06-03 02:17:36.968 t=2021-06-03T02:17:36-0400 lvl=info msg=start pg=/api/tunnels id=d5a911f013dcc868
+2021-06-03 02:17:37.269 t=2021-06-03T02:17:37-0400 lvl=info msg="started tunnel" obj=tunnels name="http-80-df24a867-567f-4ae1-a43a-8ce3666a8e1d (http)" addr=http://localhost:80 url=http://30c611d2de26.ngrok.io
+2021-06-03 02:17:37.270 t=2021-06-03T02:17:37-0400 lvl=info msg="started tunnel" obj=tunnels name=http-80-df24a867-567f-4ae1-a43a-8ce3666a8e1d addr=http://localhost:80 url=https://30c611d2de26.ngrok.io
+2021-06-03 02:17:37.271 t=2021-06-03T02:17:37-0400 lvl=info msg=end pg=/api/tunnels id=d5a911f013dcc868 status=201 dur=299.3716ms
+2021-06-03 02:17:37.272 t=2021-06-03T02:17:37-0400 lvl=info msg=start pg="/api/tunnels/http-80-df24a867-567f-4ae1-a43a-8ce3666a8e1d (http)" id=5a4272f9536a4e47
+2021-06-03 02:17:37.273 t=2021-06-03T02:17:37-0400 lvl=info msg=end pg="/api/tunnels/http-80-df24a867-567f-4ae1-a43a-8ce3666a8e1d (http)" id=5a4272f9536a4e47 status=200 dur=0s
+2021-06-03 02:19:34.716 Opening tunnel named: http-80-94e72f99-8050-41df-a7f7-c0e9e36b3fc2
+2021-06-03 02:19:34.716 t=2021-06-03T02:19:34-0400 lvl=info msg=start pg=/api/tunnels id=7fe4f8dc7d90e4e1
+2021-06-03 02:19:35.014 t=2021-06-03T02:19:35-0400 lvl=info msg="started tunnel" obj=tunnels name="http-80-94e72f99-8050-41df-a7f7-c0e9e36b3fc2 (http)" addr=http://localhost:80 url=http://39eefa9ef5d2.ngrok.io
+2021-06-03 02:19:35.014 t=2021-06-03T02:19:35-0400 lvl=info msg="started tunnel" obj=tunnels name=http-80-94e72f99-8050-41df-a7f7-c0e9e36b3fc2 addr=http://localhost:80 url=https://39eefa9ef5d2.ngrok.io
+2021-06-03 02:19:35.015 t=2021-06-03T02:19:35-0400 lvl=info msg=end pg=/api/tunnels id=7fe4f8dc7d90e4e1 status=201 dur=296.5298ms
+2021-06-03 02:19:35.015 t=2021-06-03T02:19:35-0400 lvl=info msg=start pg="/api/tunnels/http-80-94e72f99-8050-41df-a7f7-c0e9e36b3fc2 (http)" id=2c9708bad37f73a3
+2021-06-03 02:19:35.015 t=2021-06-03T02:19:35-0400 lvl=info msg=end pg="/api/tunnels/http-80-94e72f99-8050-41df-a7f7-c0e9e36b3fc2 (http)" id=2c9708bad37f73a3 status=200 dur=0s
+2021-06-03 11:38:03.503 t=2021-06-03T11:38:03-0400 lvl=eror msg="heartbeat timeout, terminating session" obj=csess id=747b628f00ec clientid=495844250ffc3a324c3ca207d099bfc1
+2021-06-03 11:38:03.503 t=2021-06-03T11:38:03-0400 lvl=eror msg="session closed, starting reconnect loop" obj=csess id=15d63e0ddaa4 err="session closed"
+2021-06-03 11:38:03.507 t=2021-06-03T11:38:03-0400 lvl=eror msg="failed to reconnect session" obj=csess id=15d63e0ddaa4 err="dial tcp: lookup tunnel.us.ngrok.com: no such host"
+2021-06-03 11:38:04.243 t=2021-06-03T11:38:04-0400 lvl=eror msg="failed to reconnect session" obj=csess id=15d63e0ddaa4 err="dial tcp: lookup tunnel.us.ngrok.com: no such host"
+2021-06-03 11:38:04.246 t=2021-06-03T11:38:04-0400 lvl=warn msg="failed to check for update" obj=updater err="Post \"https://update.equinox.io/check\": dial tcp: lookup update.equinox.io: no such host"
+2021-06-03 11:38:04.985 t=2021-06-03T11:38:04-0400 lvl=eror msg="failed to reconnect session" obj=csess id=15d63e0ddaa4 err="Get \"https://dns.google.com/resolve?cd=true&name=tunnel.us.ngrok.com&type=A\": dial tcp: lookup dns.google.com: no such host"
+2021-06-03 11:38:05.693 Got an empty FileUploader widget_value. (We expect a list with at least one value in it.)
+2021-06-03 11:38:05.694 Opening tunnel named: http-80-40219b9b-33d8-4274-9511-22b9c22d72e8
+2021-06-03 11:38:05.695 t=2021-06-03T11:38:05-0400 lvl=info msg=start pg=/api/tunnels id=137a575588afcd65
+2021-06-03 11:38:05.696 t=2021-06-03T11:38:05-0400 lvl=warn msg="failed to start tunnel" pg=/api/tunnels id=137a575588afcd65 err="session closed"
+2021-06-03 11:38:05.696 t=2021-06-03T11:38:05-0400 lvl=info msg=end pg=/api/tunnels id=137a575588afcd65 status=502 dur=0s
+2021-06-03 11:38:06.203 t=2021-06-03T11:38:06-0400 lvl=eror msg="failed to reconnect session" obj=csess id=15d63e0ddaa4 err="Get \"https://s3.amazonaws.com/dns.ngrok.com/tunnel.json\": dial tcp: lookup s3.amazonaws.com: no such host"
+2021-06-03 11:38:06.390 Opening tunnel named: http-80-662de881-801f-416e-b95c-c1417d6b602b
+2021-06-03 11:38:06.393 t=2021-06-03T11:38:06-0400 lvl=info msg=start pg=/api/tunnels id=9fdd2e907f338841
+2021-06-03 11:38:06.393 t=2021-06-03T11:38:06-0400 lvl=warn msg="failed to start tunnel" pg=/api/tunnels id=9fdd2e907f338841 err="session closed"
+2021-06-03 11:38:06.394 t=2021-06-03T11:38:06-0400 lvl=info msg=end pg=/api/tunnels id=9fdd2e907f338841 status=502 dur=0s
+2021-06-03 11:38:07.849 t=2021-06-03T11:38:07-0400 lvl=eror msg="failed to reconnect session" obj=csess id=15d63e0ddaa4 err="resolved tunnel.us.ngrok.com has no records"
+2021-06-03 11:38:10.330 t=2021-06-03T11:38:10-0400 lvl=eror msg="failed to reconnect session" obj=csess id=15d63e0ddaa4 err="dial tcp: lookup tunnel.us.ngrok.com: no such host"
+2021-06-03 11:38:14.559 t=2021-06-03T11:38:14-0400 lvl=eror msg="failed to reconnect session" obj=csess id=15d63e0ddaa4 err="x509: certificate is valid for tunnel.us.ngrok.com, not korgn.su.lennut.com"
+2021-06-03 11:38:20.746 t=2021-06-03T11:38:20-0400 lvl=eror msg="failed to reconnect session" obj=csess id=15d63e0ddaa4 err="x509: certificate is valid for tunnel.us.ngrok.com, not korgn.su.lennut.com"
+2021-06-03 11:38:27.796 t=2021-06-03T11:38:27-0400 lvl=eror msg="failed to reconnect session" obj=csess id=15d63e0ddaa4 err="resolved tunnel.us.ngrok.com has no records"
+2021-06-03 11:38:38.249 t=2021-06-03T11:38:38-0400 lvl=info msg="tunnel session started" obj=tunnels.session
+2021-06-03 11:38:38.851 t=2021-06-03T11:38:38-0400 lvl=info msg="client session established" obj=csess id=15d63e0ddaa4
+2021-06-03 12:09:01.357 t=2021-06-03T12:09:01-0400 lvl=info msg="received stop request" obj=app stopReq="{err:<nil> restart:false}"
+2021-06-03 12:09:01.358 t=2021-06-03T12:09:01-0400 lvl=info msg="session closing" obj=tunnels.session err=nil
+2021-06-03 12:09:01.359 t=2021-06-03T12:09:01-0400 lvl=info msg="accept failed" obj=csess id=15d63e0ddaa4 err="reconnecting session closed"
+Link to web app:
+NgrokTunnel: "http://30c611d2de26.ngrok.io" -> "http://localhost:80"
+Link to web app:
+NgrokTunnel: "http://39eefa9ef5d2.ngrok.io" -> "http://localhost:80"
+  Stopping...
