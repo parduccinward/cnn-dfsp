@@ -1,4 +1,5 @@
-pip install tensorflow==2.5.0
+pip install --upgrade pip
+pip install tensorflow
 pip install keras
 pip install streamlit
 pip install pillow
