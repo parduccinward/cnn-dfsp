@@ -4,24 +4,24 @@ import numpy as np
 
 
 def teachable_machine_classification(img, weights_file):
-    # Load the model
+    # Cargar el modelo
     model = tensorflow.keras.models.load_model(weights_file)
 
-    # Create the array of the right shape to feed into the keras model
+    # crear una matriz del tamaño exacto para ser alimentado por el modelo keras
     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
     image = img
-    #image sizing
+    # cambiando el tamaño de la imagen
     size = (224, 224)
     image = ImageOps.fit(image, size, Image.ANTIALIAS)
 
-    #turn the image into a numpy array
+    # convirtiendo la imagen en un numpy array
     image_array = np.asarray(image)
-    # Normalize the image
+    # normalizando la imagen
     normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
 
-    # Load the image into the array
-    data[0] = normalized_image_array  # (Not sure if this is needed, but gives an error!!!)
+    # Cargando la imagen en una matriz (paso que puede omitirse)
+    data[0] = normalized_image_array
 
-    # run the inference
+    # correr con el modelo
     prediction = model.predict(data)
-    return np.argmax(prediction) # return position of the highest probability
+    return (prediction)
