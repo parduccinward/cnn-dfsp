@@ -5,6 +5,7 @@ from img_classification import teachable_machine_classification
 import keras
 from PIL import Image, ImageOps
 import numpy as np
+
 st.title("Sistema de Diagnóstico asistido por ordenador")
 st.header("Clasificación de cáncer de piel mediante CNN")
 st.text("Por favor introduce una imagen de una lesión cutánea que pueda sospechar DFSP, carcinoma o melanoma:")
