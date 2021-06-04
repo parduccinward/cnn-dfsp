@@ -1,7 +1,7 @@
-pip install tensorflow
-pip install keras
-pip install streamlit
-pip install pillow
-pip install numpy
-pip install pyngrok
-pip install opencv-python
+tensorflow
+keras
+streamlit
+pillow
+numpy
+pyngrok
+opencv-python
