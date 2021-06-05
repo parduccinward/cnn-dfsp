@@ -3,7 +3,7 @@ from PIL import Image, ImageOps
 import numpy as np
 
 
-def teachable_machine_classification(img, weights_file):
+def get_prediction(img, weights_file):
     # Cargar el modelo
     model = tensorflow.keras.models.load_model(weights_file)
 

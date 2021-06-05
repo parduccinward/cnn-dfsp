@@ -1,7 +1,7 @@
 from pyngrok import ngrok
 import streamlit as st
 import tensorflow as tf
-from img_classification import teachable_machine_classification
+from img_classification import get_prediction
 import tensorflow.keras
 from PIL import Image, ImageOps
 import numpy as np
@@ -37,11 +37,11 @@ if uploaded_file is not None:
     st.image(image, width=500, caption='Imagen subida exitosamente.',
              use_column_width=True)
     st.write("")
-    prediction = teachable_machine_classification(image, "./model/model.h5")
+    prediction = get_prediction(image, "./model/model.h5")
     # score = tf.nn.softmax(predictions[0]) si no funca
     label = np.argmax(prediction)
     percentage = 100 * np.max(prediction)
-    if label == 0:
+    if label == 0:  # Logfca por si la etiqueta corresponde a tumor benigno
         st.subheader(
             "La imagen es más probable que pertenezca a un Tumor benigno, con una probabilidad del " + str("%.2f" % percentage)+"%")
         st.header("Dermatofibroma (Tumor benigno)")
@@ -50,7 +50,7 @@ if uploaded_file is not None:
         st.subheader("Tratamiento")
         st.write("Dado que es una lesión benigna no precisa tratamiento salvo que produzca molestias o por motivos estéticos. El tratamiento de elección, cuando es necesario, es la extirpación mediante cirugía.")
 
-    if label == 1:
+    if label == 1:  # Logfca por si la etiqueta corresponde a carcinoma de celulas basales
         st.subheader("La imagen es más probable que pertenezca a un Carcinoma de celulas basales, con una probabilidad del " +
                      str("%.2f" % percentage)+"%")
         st.header("Carcinoma de celulas basales (BCC)")
@@ -66,7 +66,7 @@ if uploaded_file is not None:
         st.write("En este procedimiento, el médico corta la lesión cancerosa y un margen de piel sana que la rodea. El margen se examina en el microscopio para asegurarse de que no haya células cancerosas. Se podría recomendar la escisión para los carcinomas de células basales que tienen menos probabilidad de reaparecer, como los que se forman en el pecho, la espalda, las manos y los pies.")
         st.subheader("Cirugía de Mohs")
         st.write("Durante la cirugía de Mohs, el médico retira el cáncer capa por capa y examina cada capa bajo el microscopio hasta que no queden células anormales. Esto permite que el cirujano se asegure de retirar todo el crecimiento y evite tomar mucha cantidad de piel sana alrededor de él. La cirugía de Mohs podría recomendarse si tu carcinoma de células basales tiene un riesgo más alto de recurrencia, por ejemplo, si es más grande, se extiende más profundamente en la piel o lo tienes en la cara.")
-    if label == 2:
+    if label == 2:  # Logfca por si la etiqueta corresponde a DFSP
         st.subheader(
             "La imagen es más probable que pertenezca a un DFSP, con una probabilidad del " + str("%.2f" % percentage)+"%")
         st.header("Dermatofibrosarcoma protuberans (DFSP)")
@@ -85,7 +85,7 @@ if uploaded_file is not None:
         st.write("La cirugía de Mohs es un tipo de cirugía especializada que implica la eliminación progresiva de capas delgadas de piel que contiene cáncer hasta que solo quede tejido libre de cáncer. Después de que se quita cada capa de piel, se examina en busca de signos de cáncer. El proceso continúa hasta que no hay signos de cáncer.")
         st.subheader("Radioterapia")
         st.write("La radioterapia utiliza potentes rayos de energía, como rayos X y protones, para destruir las células cancerosas. Se  puede recomendar radioterapia si no se pudo extirpar todo el cáncer durante la cirugía.")
-    if label == 3:
+    if label == 3:  # Logfca por si la etiqueta corresponde a melanoma
         st.subheader(
             "La imagen es más probable que pertenezca a un Melanoma, con una probabilidad del " + str("%.2f" % percentage)+"%")
         st.header("Melanoma")
