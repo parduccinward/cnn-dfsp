@@ -10,7 +10,7 @@ def get_prediction(img, weights_file):
     # crear una matriz del tamaño exacto para ser alimentado por el modelo keras
     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
     image = img
-    # cambiando el tamaño de la imagen
+    # cambiando el tamaño de la imagen que sera utilizada
     size = (224, 224)
     image = ImageOps.fit(image, size, Image.ANTIALIAS)
 
