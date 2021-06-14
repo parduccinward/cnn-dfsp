@@ -14,9 +14,9 @@ def get_prediction(img, weights_file):
     size = (224, 224)
     image = ImageOps.fit(image, size, Image.ANTIALIAS)
 
-    # convirtiendo la imagen en un numpy array
+    # Convirtiendo la imagen en un numpy array
     image_array = np.asarray(image)
-    # normalizando la imagen
+    # Normalizando la imagen
     normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
 
     # Cargando la imagen en una matriz (paso que puede omitirse)
