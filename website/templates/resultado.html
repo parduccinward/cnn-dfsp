@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block title %}Inicio{% endblock %}
+
+{% block content %} 
+        <div class = "second-main">
+            <div class = "header">
+                <row style = "width: 100% ; display: flex; justify-content: center; padding-bottom: 25px;">
+                    <h3 class="header-text">¡Imagen cargada correctamente!</h3>
+                </row>
+                <row style = "width: 100% ; display: flex; justify-content: center; padding-bottom: 25px;">
+                    <img class = "result-img" src={{url_for('static', filename = 'images/'+ img)}}>
+                </row>
+            </div>
+
+            <div class = "info">
+            
+                <row style = "width: 100% ; display: flex; justify-content: center; padding-bottom: 15px;">
+                    <h3 class = "header-text">Predicción del modelo</h3>
+                </row>
+                <row style = "width: 100%; display: flex; justify-content: center; padding-bottom: 15px;">
+                    <table class="table-bordered table-custom">
+                        <tr>
+                            <th>Lugar</th>
+                            <th>Clases</th>
+                            <th>Probabilidad</th>
+                        </tr>
+                        <tr>
+                            <td>1ero</td>
+                            <td>{{ predictions.class1 }}</td>
+                            <td>{{ predictions.prob1 }} %</td>
+                        </tr>
+                        <tr>
+                            <td>2ndo</td>
+                            <td>{{ predictions.class2 }}</td>                                                         
+                            <td>{{ predictions.prob2 }} %</td>                                                      
+                        </tr>                                                                                                               
+                        <tr>
+                            <td>3ero</td>
+                            <td>{{ predictions.class3 }}</td>
+                            <td>{{ predictions.prob3 }} %</td>
+                        </tr>
+                    </table>
+                </row>
+            </div>
+            <row style = "width: 100% ; display: flex; justify-content: center; padding-bottom: 25px;">
+                <form action="/resultado">
+                    <button type="submit" class="btn btn-success">Realizar nueva predicción</button>
+                </form>
+            </row>
+        </div>
+
+{% endblock %}

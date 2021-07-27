@@ -1,3 +1,7 @@
 .venv
 *.bin
 node_modules
+database.db
+UsersparduOneDriveDesktopcnn-dfspwebsitedatabase.db
+nohup.out
+images
