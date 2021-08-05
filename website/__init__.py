@@ -3,9 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 import tensorflow as tf
+from .tasks import *
+from .trainining_process import *
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
+
+__all__ = ('celery_app',)
 
 
 def create_app():

@@ -11,7 +11,13 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/')
 def home():
-    return redirect("login")
+    if current_user.is_authenticated:
+        if current_user.role == 'admin':
+            return redirect(url_for('views.homeAdm'))
+        else:
+            return redirect(url_for('views.homeMed'))
+    else:
+        return redirect("login")
 
 
 @auth.route('/login', methods=['GET', 'POST'])

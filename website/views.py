@@ -8,6 +8,8 @@ from .auth import requires_roles
 from PIL import Image
 import numpy as np
 from .img_classification import get_prediction, predict
+from .trainining_process import train_models
+from .tasks import training
 views = Blueprint('views', __name__)
 
 ALLOWED_EXT = set(['jpg', 'jpeg', 'png'])
@@ -74,8 +76,33 @@ def prediccion():
     return render_template("prediccion.html", user=current_user)
 
 
-@views.route('/resultado', methods=['GET', 'POST'])
+@views.route('/loading', methods=['GET', 'POST'])
 @login_required
+def loading():
+    if request.method == 'POST':
+        f1_min = int(request.form.get('f1_min'))
+        f1_max = int(request.form.get('f1_max'))
+        d1_min = float(request.form.get('d1_min'))
+        d1_max = float(request.form.get('d1_max'))
+        f2_min = int(request.form.get('f2_min'))
+        f2_max = int(request.form.get('f2_max'))
+        d2_min = float(request.form.get('d2_min'))
+        d2_max = float(request.form.get('d2_max'))
+        batch = int(request.form.get('batch'))
+        epoch = int(request.form.get('epoch'))
+        combinations = int(request.form.get('combinations'))
+        models_list = training.delay(f1mn=f1_min, f1mx=f1_max, d1mn=d1_min, d1mx=d1_max, f2mn=f2_min,
+                                     f2mx=f2_max, d2mn=d2_min, d2mx=d2_max, btch=batch, epch=epoch, cmbntins=combinations)
+        print(models_list)
+        # CONECTAR ESTOS VALORES CON TRAIN_MODELS
+        # Editar TRAIN_MODELS PARA QUE DEVUELVA UNA CADENA CON LOS MEJORES MODELOS (PUEDE SER)
+        # IMPLEMENTAR CELERY PARA REALIZAR EL PROCESO DE ENTRENAMIENTO (CREAR BOTONES)
+
+    return render_template("loading.html", user=current_user)
+
+
+@ views.route('/resultado', methods=['GET', 'POST'])
+@ login_required
 def resultado():
     error = ''
     target_img = os.path.join(os.getcwd(), 'website/static/images')
