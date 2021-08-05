@@ -28,6 +28,6 @@ Este proyecto es alimentado por 260 Imágenes de lesiones de la piel alojadas en
 
 ### Desarrollo Web
 
-- Streamlit
+- Flask
 - Python
-- pyngrok
+- HTML-5
