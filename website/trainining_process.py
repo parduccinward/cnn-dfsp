@@ -25,7 +25,6 @@ from keras_tuner.tuners import RandomSearch
 from keras_tuner.engine.hyperparameters import HyperParameters
 import time
 
-
 LOG_DIR = f"./train/training_results/{int(time.time())}/"
 range_values = []
 X_train = np.load(
@@ -75,19 +74,19 @@ learning_rate_reduction = ReduceLROnPlateau(monitor='accuracy',
 def build_model(hp):
     val = range_values
     model = keras.models.Sequential()
-    model.add(Conv2D(hp.Int("conv1_units", val[0], val[1], step=32), kernel_size=(
+    model.add(Conv2D(hp.Int("conv1_units", min_value=val[0], max_value=val[1], step=32), kernel_size=(
         3, 3), input_shape=X_train.shape[1:], kernel_initializer='glorot_uniform'))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(
-        Dropout(hp.Float("dropout1_units", val[2], val[3], step=0.05)))
+        Dropout(hp.Float("dropout1_units", min_value=val[2], max_value=val[3], step=0.05)))
 
-    model.add(Conv2D(hp.Int("conv2_units", val[4], val[5], step=32), kernel_size=(3, 3),
+    model.add(Conv2D(hp.Int("conv2_units", min_value=val[4], max_value=val[5], step=32), kernel_size=(3, 3),
                      kernel_initializer='glorot_uniform'))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(hp.Float("dropout2_units",
-              val[6], val[7], step=0.05)))
+              min_value=val[6], max_value=val[7], step=0.05)))
 
     model.add(Flatten())
     model.add(Dense(128, activation='relu', kernel_initializer='normal'))
@@ -109,8 +108,6 @@ def tuners(b, e, c):
 
     tuner.search(x=X_train, y=y_train, epochs=e, batch_size=b,
                  validation_data=(X_validation, y_validation))
-    #best_models = tuner.get_best_models()[0]
-    # return best_models
 
 
 def train_models(f1_min, f1_max, d1_min, d1_max, f2_min, f2_max, d2_min, d2_max, batch, epoch, combinations):
@@ -118,10 +115,10 @@ def train_models(f1_min, f1_max, d1_min, d1_max, f2_min, f2_max, d2_min, d2_max,
     range_values = [f1_min, f1_max, d1_min,
                     d1_max, f2_min, f2_max, d2_min, d2_max]
     search = tuners(b=batch, e=epoch, c=combinations)
+    # pickle_values()
     return search
 
 
-# Eliminar despues
-# models_list = train_models(f1_min=64, f1_max=192, d1_min=0.10, d1_max=0.30, f2_min=64,
-#                           f2_max=224, d2_min=0.10, d2_max=0.30, batch=10, epoch=1, combinations=1)
-# print(models_list)
+def pickle_values():
+    t = pickle.load(open("tuner_1576720506.pkl", "rb"))
+    print(t.get_best_hyperparameters()[0].values)

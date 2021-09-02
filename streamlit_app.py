@@ -59,7 +59,7 @@ if uploaded_file is not None:
         st.write("")
         st.write("El carcinoma de células basales (también referido como cáncer de piel de células basales) es el tipo más común de cáncer de piel. Alrededor de 8 de cada 10 casos de cáncer de piel son carcinomas de células basales (también llamados cánceres de células basales).")
         st.write("Estos cánceres comienzan en la capa celular basal, que es la parte inferior de la epidermis. Por lo general, estos cánceres surgen en las zonas expuestas al sol, especialmente la cara, la cabeza y el cuello. Estos cánceres suelen crecer lentamente. Es muy poco común que el cáncer de células basales se propague a otras partes del cuerpo. Pero de no tratarse, el cáncer de células basales puede extenderse hacia las áreas cercanas e invadir el hueso u otros tejidos debajo de la piel.")
-        st.write("El carcinoma de células basales puede reaparecer (recurrir) en el mismo lugar de la piel, si no se extrae completamente. Las personas que han tenido cánceres de piel de células basales también tienen una probabilidad mayor de padecer nuevos cánceres en otros lugares..")
+        st.write("El carcinoma de células basales puede reaparecer (recurrir) en el mismo lugar de la piel, si no se extrae completamente. Las personas que han tenido cánceres de piel de células basales también tienen una probabilidad mayor de padecer nuevos cánceres en otros lugares.")
         st.subheader("Tratamiento")
         st.write("El carcinoma de células basales se trata con mayor frecuencia con cirugía para extirpar todo el cáncer y parte del tejido sano que lo rodea. Las opciones pueden ser las siguientes:")
         st.subheader("Escisión quirúrgica")

@@ -1,5 +1,178 @@
 {% extends "base.html" %} {% block title %}Inicio{% endblock %}
 
-{% block content %} 
-<h1>Pacientes a cargo</h1>
+{% block content %}
+
+    <div class ="jumbotron p-3">
+        <table class="table table-hover table-info">
+
+            <h2>Administrar<b> Pacientes</b> <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#mymodal">Agregar Nuevo Paciente</button></h2>
+
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Brindar atención</th>
+                <th>Accion</th>
+            </tr>
+
+                {% for row in pacientes %}
+                <tr>
+                <td>{{row.id}}</td>
+                <td>{{row.nombre}}</td>
+                <td>{{row.apellido}}</td>
+                <td>{{row.email}}</td>
+                <td>
+                    <a href="" class="btn btn-secondary btn-xs" data-toggle="modal" data-target="#modalhistorial">Ver Historial Médico</a>
+                    <a href="/diagnostico/{{row.id}}" class="btn btn-dark btn-xs">Diagnosticar</a>
+                </td>
+                <td>
+                    <a href="/update_patient/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Editar</a>
+                    <a href="/delete_patient/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Estas seguro que quieres eliminar este paciente?')">Eliminar</a>
+                </td>
+            </tr>
+
+
+            <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                   <div class="modal-content">
+              
+                      <div class="modal-header">
+                         <h4 class="modal-title">Actualizar información</h4>
+                      </div>
+              
+              
+                      <div class="modal-body">
+                         <form action="{{url_for('views.update_patient')}}" method="POST">
+              
+                            <div class="form-group">
+                               <label>Nombre:</label>
+                                <input type="hidden"  name="id" value="{{row.id}}">
+                                <input type="text" class="form-control" name="nombrePaciente" value="{{row.nombre}}">
+                            </div>
+              
+                            <div class="form-group">
+                                <label>Apellido:</label>
+                                 <input type="text" class="form-control" name="apellidoPaciente" value="{{row.apellido}}">
+                             </div>
+
+                            <div class="form-group">
+                                <label for="sexo">Sexo: </label>
+                                    <select id="sexo" name="sexoPaciente" value="{{row.sexo}}">
+                                        <option value="masculino">Masculino</option>
+                                        <option value="femenino">Femenino</option>
+                                    </select>
+                            </div>
+                             
+                            
+                            <div class="form-group">
+                                <label for="nacimientoPaciente">Fecha de Nacimiento: </label>
+                                <input type="date" id="nacimientoPaciente" name="nacimientoPaciente"
+                                   value="{{row.fecha_nacimiento}}"
+                                   min="1900-01-01" max="2021-01-01" required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="email" class="form-control" name="emailPaciente" value="{{row.email}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Direccion:</label>
+                                <input type="text" class="form-control" name="direccionPaciente" value="{{row.direccion}}">
+                            </div>
+        
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Actualizar</button>
+                            </div>
+              
+              
+                         </form>
+                      </div>
+              
+              
+                      <div class="modal-footer">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+              
+              
+                   </div>
+              
+                </div>
+             </div>
+
+        
+                {% endfor %}
+        
+        </table>
+    </div>
+
+    <div id="mymodal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <h4 class="modal-title">Agregar paciente</h4>
+              </div>
+
+
+              <div class="modal-body">
+
+                 <form action="{{url_for('views.add_patient')}}" method="POST">
+                    <div class="form-group">
+                       <label>Nombre:</label>
+                       <input type="text" class="form-control" name="nombrePaciente" required="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Apellido:</label>
+                        <input type="text" class="form-control" name="apellidoPaciente" required="1">
+                     </div>
+
+                     <div class="form-group">
+                        <label for="sexo">Sexo: </label>
+                            <select id="sexo" name="sexoPaciente" required="1">
+                                <option value="masculino">Masculino</option>
+                                <option value="femenino">Femenino</option>
+                            </select>
+                     </div>
+
+                     <div class="form-group">
+                        <label for="nacimientoPaciente">Fecha de Nacimiento: </label>
+                        <input type="date" id="nacimientoPaciente" name="nacimientoPaciente"
+                           value="2021-01-01"
+                           min="1900-01-01" max="2021-01-01" required="1">
+                    </div>
+
+                     <div class="form-group">
+                       <label>Email:</label>
+                       <input type="email" class="form-control" name="emailPaciente" required="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Direccion:</label>
+                        <input type="text" class="form-control" name="direccionPaciente" required="1">
+                     </div>
+
+                    <div class="form-group">
+                       <button class="btn btn-primary" type="submit">Agregar Paciente</button>
+                    </div>
+                 </form>
+
+              </div>
+
+
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              </div>
+      
+      
+           </div>
+      
+      
+        </div>
+      
+      
+     </div>
+
 {% endblock %}

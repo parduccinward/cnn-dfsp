@@ -1,6 +1,7 @@
 from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
+from datetime import datetime, date
 
 
 class User(db.Model, UserMixin):
@@ -16,28 +17,18 @@ class Medico(db.Model):
     apellido = db.Column(db.String(150))
     email = db.Column(db.String(150))
     telefono = db.Column(db.Integer)
-    especialidad_id = db.Column(db.Integer, db.ForeignKey('especialidad.id'))
+    especialidad = db.Column(db.String(150))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-
-class Especialidad(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(150))
 
 
 class Paciente(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(150))
     apellido = db.Column(db.String(150))
-    id_genero = db.Column(db.Integer, db.ForeignKey('genero.id'))
-    fecha_nacimiento = db.Column(db.Date)
+    sexo = db.Column(db.String(150))
+    fecha_nacimiento = db.Column(db.DateTime)
     email = db.Column(db.String(150))
     direccion = db.Column(db.String(150))
-
-
-class Genero(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(150))
 
 
 pacientes = db.Table('pacientes',
@@ -51,7 +42,7 @@ pacientes = db.Table('pacientes',
 class Prediccion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     imagen = db.Column(db.LargeBinary)
-    imagen = db.Column(db.Float)
+    porcentaje = db.Column(db.Float)
 
 
 class Enfermedad(db.Model):

@@ -1,22 +1,25 @@
 {% extends "base.html" %} {% block title %}Inicio{% endblock %}
 
 {% block content %} 
-<div class="container">
-    <h1 class="jumbotron bg-primary">Reconocimiento de Lesiones Cutaneas</h1>
-    <br><br>
+<div class="jumbotron p-3">
+    <h1 style="color:white;"class="jumbotron bg-primary">Sistema de Diagnóstico asistido por ordenador 🩺🏥</h1>
     <form class="form-horizontal" action="/resultado" method="post" enctype="multipart/form-data">
-  
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="pwd">Sube una imagen:</label>
-        <div class="col-sm-10">          
-          <input type="file" class="file-form-input"  name="file" id="pwd">
+      <row style = "width: 100% ; display: d-flex flex-column; justify-content: center;">
+        <h2 class = "header-text">Clasificación de cáncer de piel mediante CNN</h2> <br>
+        <h6 class = "header-text">Las enfermedades que el sistema puede reconocer son BCC, DFSP y Melanoma. Además, puede reconocer Dermatofibroma que es un tumor benigno.</h6>
+        <h6 class = "header-text">Los resultados proporcionados por esta herramienta sirven para apoyarse en el proceso de diagnóstico. Por esta razón, todo diagnóstico proporcionado por este sistema debe ser validado por un médico especialista y/o mediante pruebas especializadas.</h6><br>
+        <div>
+          <h6 class = "header-text">Instrucciones de utilización:</h6>
+          <h8 class = "header-text">&#x2022;Trata de que la imagen se vea lo más nítida posible.</h8><br>
+          <h8 class = "header-text">&#x2022;Que la imagen sea tomada de frente y de cerca.</h8><br>
+          <h8 class = "header-text">&#x2022;Intenta de que la lesión cutánea se encuentre en el medio de la imagen.</h8><br><br>
         </div>
+        <h6 class = "header-text">Escoge un archivo JPG o PNG:</h6><br>
+        <div class="d-flex align-items-center flex-column">  
+          <input type="file" accept="image/png, image/jpeg" class="file-form-input"  name="file" id="pwd" ><br>      
+              <button type="submit" class="btn btn-success">Subir Imagen</button>
       </div>
-  
-      <div class="form-group">        
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-success">Subir</button>
-        </div>
+      </row>
       </div>
     </form>
 {% endblock %}
