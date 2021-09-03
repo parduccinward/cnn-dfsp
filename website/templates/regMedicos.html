@@ -1,5 +1,14 @@
 {% extends "base.html" %} {% block title %}Inicio{% endblock %}
 
-{% block content %} 
-<h1>Registrar Medicos</h1>
+{% block content %}
+<form method="post" action=""></form>
+<input type="text" class="form-control" name="nombreMedico" placeholder="Nombre" required>
+    <input type="text" class="form-control" name="apellidoMedico" placeholder="Apellido" required>
+    <input type="email" class="form-control" name="emailMedico" placeholder="Email" required>
+    <input type="number" class="form-control" name="numeroMedico" placeholder="Telefono" required>
+    <input type="text" class="form-control" name="especialidadMedico" placeholder="Especialidad" required>
+    <button class="btn btn-primary btn-block">
+      Guardar Medico
+    </button>
+  </form>
 {% endblock %}

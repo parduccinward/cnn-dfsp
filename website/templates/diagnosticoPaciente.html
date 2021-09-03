@@ -1,15 +1,14 @@
 {% extends "base.html" %} {% block title %}Inicio{% endblock %}
 
 {% block content %} 
-<h2>Realizar nuevo Diagnostico a {{paciente.nombre}} 🤒🔜😄</h2><br>
+<h2>Realizar nuevo Diagnostico a un paciente 🤒🔜😄</h2><br>
 <h5>La decisión final respecto a la condición de los pacientes siempre estará en manos de los profesionales de la salud. Por lo cual, si el médico ya tiene la certeza de cual es la condición del paciente, puede pasar a realizar un diagnóstico sin necesidad de recibir sugerencias por parte del sistema inteligente.</h5> <br>
 <p>-Si tienes dudas respecto a la lesión cutánea del paciente mejor utiliza el sistema inteligente para recibir una sugerencia que puedes utilizar a la hora de redactar tu diagnóstico.</p>
-<p>-Si cuentas con la certeza de que el paciente cuenta con cierta enfermedad, puedes pasar a diagnosticar directamente sin pasar por el sistema inteligente.</p><br><br>
+<h4>Primero selecciona un paciente al que quieras diagnosticar.</h4>
 
 <row style = "width: 100% ; display: flex; justify-content: center; padding-bottom: 15px;">
     <div style="margin-right: 30px;">
-        <a href="/reporte/{{paciente.id}}/" class="btn btn-success btn-xs">Solo diagnostico</a>
+        <a href="/pacientes/" class="btn btn-success btn-xs">Seleccionar paciente</a>
     </div>
-    <a href="/prediccionDiagnostico/{{paciente.id}}" class="btn btn-success btn-xs">Usar sistema inteligente</a>
 </row>
 {% endblock %}

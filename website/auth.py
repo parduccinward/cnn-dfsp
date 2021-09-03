@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login.utils import logout_user
-from .models import User, Paciente, Medico, Prediccion, Enfermedad, Diagnostico
+from .models import Usuario, Paciente, Medico, Prediccion, Enfermedad, Diagnostico
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, current_user
@@ -26,7 +26,7 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        user = User.query.filter_by(username=username).first()
+        user = Usuario.query.filter_by(username=username).first()
         if user:
             if check_password_hash(user.password, password):
                 flash('Autentificado correctamente!', category='success')
@@ -57,7 +57,7 @@ def sign_up():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
-        user = User.query.filter_by(username=username).first()
+        user = Usuario.query.filter_by(username=username).first()
         if user:
             flash('El usuario ya existe.', category='error')
         elif len(username) < 4:
@@ -69,7 +69,7 @@ def sign_up():
             flash('La contraseña debe ser de por lo menos 7 caracteres.',
                   category='error')
         else:
-            new_user = User(username=username, password=generate_password_hash(
+            new_user = Usuario(username=username, password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()

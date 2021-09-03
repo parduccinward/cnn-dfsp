@@ -1,5 +1,27 @@
 {% extends "base.html" %} {% block title %}Inicio{% endblock %}
 
 {% block content %} 
-<h1>Administrar Usuarios</h1>
+<div class ="jumbotron p-3">
+    <table class="table table-hover table-active">
+
+        <h2>Lista de <b> Usuarios</b></h2>
+
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Acciones</th>
+        </tr>
+
+            <tr>
+            <td>1</td>
+            <td>admin</td>
+            <td>
+                <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="">Editar</a>
+                <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Estas seguro que quieres eliminar este paciente?')">Eliminar</a>
+            </td>
+        </tr>
+    
+    </table>    
+  
+ </div>
 {% endblock %}

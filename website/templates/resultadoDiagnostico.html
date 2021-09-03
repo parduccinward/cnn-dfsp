@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% block title %}Inicio{% endblock %}
+
+{% block content %} 
+        <div class = "second-main">
+            <div class = "header">
+                <row style = "width: 100% ; display: flex; justify-content: center; padding-bottom: 25px; margin-top: 20px;">
+                    <h4 class="header-text">Resultado diagnóstico sugerido de {{paciente.nombre}}</h4>
+                </row>
+                <row style = "width: 100% ; display: flex; justify-content: center; padding-bottom: 25px;">
+                    <img class = "result-img" src={{url_for('static', filename = 'images/'+ img)}}>
+                </row>
+            </div>
+
+            <div class = "info">
+            
+                <row style = "width: 100% ; display: flex; justify-content: center; padding-bottom: 15px;">
+                    <h4 class = "header-text">Predicción del modelo</h4>
+                </row>
+                <row style = "width: 100%; display: flex; justify-content: center; padding-bottom: 15px;">
+                            <h5>La imagen es más probable que pertenezca a un <b>{{ disease }}</b></h5>
+                </row>
+                <row style = "width: 100%; display: flex; justify-content: center; padding-bottom: 15px;">
+                    <h5>Con una probabilidad de {{ predictions.prob1 }} %</h5>
+                </row>
+                <row style = "width: 100%; display: flex; justify-content: center; padding-bottom: 15px;">
+                    <h7>{{description}}</h7>
+                </row>
+                <row style = " display: d-flex flex-column; justify-content: center; padding-bottom: 15px;">
+                    <h4>Tratamiento</h4>
+                    <h7>{{treatment}}</h7>
+                </row>
+            </div>
+            <row style = "display: flex; justify-content: center; padding-top: 30px;">
+                <form action="/reporte/{{paciente.id}}">
+                    <button type="submit" class="btn btn-success">Realizar diagnostico</button>
+                </form>
+            </row>
+        </div>
+
+{% endblock %}

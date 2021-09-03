@@ -1,5 +1,116 @@
 {% extends "base.html" %} {% block title %}Inicio{% endblock %}
 
-{% block content %} 
-<h1>Medico</h1>
+{% block content %}
+<style type="text/css">
+    .container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.wrimagecard {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    position: relative;
+    background: #fff;
+    box-shadow: 12px 15px 5px 0px rgb(46 61 73 / 15%);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+.wrimagecard .fa {
+    position: relative;
+    font-size: 70px;
+}
+.wrimagecard-topimage_header {
+    padding: 20px;
+}
+.col-md-3 {
+    width: 25%;
+}
+.wrimagecard-topimage_title {
+    padding: 20px 24px;
+    height: 80px;
+    padding-bottom: 0.75rem;
+    position: relative;
+}
+h4, .h4 {
+    font-size: 18px;
+    text-align: center
+}
+.wrimagecard-topimage a {
+    border-bottom: none;
+    text-decoration: none;
+    color: #525c65;
+    transition: color 0.3s ease;
+}
+</style> 
+<div class="jumbotron p-3">
+    <br>
+    <h1 style="color:white;"class="jumbotron bg-primary">¡Bienvenido otra vez {{current_user.username}}! 🩺 🏥 </h1>
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-3 col-sm-4">
+        <div class="wrimagecard wrimagecard-topimage">
+              <a href="/pacientes">
+              <div class="wrimagecard-topimage_header" style="background-color:rgba(51, 105, 232, 0.1) ">
+                <center><i class="fa fa-user" style="color:#3484F0"></i></center>
+              </div>
+              <div class="wrimagecard-topimage_title">
+                <h4>Pacientes
+              </div>
+            </a>
+          </div>
+          </div>
+        <div class="col-md-3 col-sm-4">
+          <div class="wrimagecard wrimagecard-topimage">
+              <a href="/diagnosticoPaciente">
+              <div class="wrimagecard-topimage_header" style="background-color: rgba(51, 105, 232, 0.1)">
+                <center><i class="fa fa-user-md" style="color:#3484F0"></i></center>
+              </div>
+              <div class="wrimagecard-topimage_title">
+                <h4>Diagnóstico
+                <div class="pull-right badge" id="WrControls"></div></h4>
+              </div>
+            </a>
+          </div>
+    </div>
+    <div class="col-md-3 col-sm-4">
+          <div class="wrimagecard wrimagecard-topimage">
+              <a href="/prediccion">
+              <div class="wrimagecard-topimage_header" style="background-color:  rgba(51, 105, 232, 0.1)">
+                <center><i class="fa fa-image" style="color:#3484F0"> </i></center>
+              </div>
+              <div class="wrimagecard-topimage_title">
+                <h4>Utilizar Sistema inteligente
+                <div class="pull-right badge" id="WrForms"></div>
+                </h4>
+              </div>
+              
+            </a>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-4">
+          <div class="wrimagecard wrimagecard-topimage">
+              <a href="/logout">
+              <div class="wrimagecard-topimage_header" style="background-color:  rgba(51, 105, 232, 0.1)">
+                 <center><i class="fa fa-mail-forward" style="color:#3484F0"> </i></center>
+              </div>
+              <div class="wrimagecard-topimage_title">
+                <h4>Salir
+                <div class="pull-right badge" id="WrGridSystem"></div></h4>
+              </div>
+              
+            </a>
+          </div>
+        </div>
+             
+            </a>
+          </div>
+        </div>
+        
+    </div>
+    </div>
+
+
 {% endblock %}
