@@ -14,7 +14,7 @@ __all__ = ('celery_app',)
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = '1Gz34UqRZk!'
+    app.config['SECRET_KEY'] = 'd$u$43!B2REHBfkv'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
 
