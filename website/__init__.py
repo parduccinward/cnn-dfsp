@@ -5,6 +5,8 @@ from flask_login import LoginManager
 import tensorflow as tf
 from .tasks import *
 from .trainining_process import *
+from datetime import timedelta
+
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -16,6 +18,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'd$u$43!B2REHBfkv'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['REMEMBER_COOKIE_DURATION'] = timedelta(minutes=15)
     db.init_app(app)
 
     from .views import views
@@ -29,6 +32,8 @@ def create_app():
     create_database(app)
 
     login_manager = LoginManager()
+    login_manager.login_message = u"Por favor autentícate para acceder a esta página."
+    login_manager.login_message_category = "error"
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 

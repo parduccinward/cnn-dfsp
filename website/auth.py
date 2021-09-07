@@ -12,7 +12,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/')
 def home():
     if current_user.is_authenticated:
-        if current_user.role == 'admin':
+        if Usuario.is_admin(current_user.role):
             return redirect(url_for('views.homeAdm'))
         else:
             return redirect(url_for('views.homeMed'))
@@ -31,7 +31,7 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Autentificado correctamente!', category='success')
                 login_user(user, remember=True)
-                if user.role == 'admin':
+                if Usuario.is_admin(user.role):
                     return redirect(url_for('views.homeAdm'))
                 else:
                     return redirect(url_for('views.homeMed'))
@@ -75,7 +75,7 @@ def sign_up():
             db.session.commit()
             login_user(new_user, remember=True)
             flash('Cuenta creada correctamente!', category='success')
-            if user.role == 'admin':
+            if Usuario.is_admin(user.role):
                 return redirect(url_for('views.homeAdm'))
             else:
                 return redirect(url_for('views.homeMed'))

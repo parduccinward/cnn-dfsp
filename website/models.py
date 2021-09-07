@@ -1,3 +1,4 @@
+from os import name
 from . import db
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship
@@ -12,6 +13,9 @@ class Usuario(db.Model, UserMixin):
     medico = relationship("Medico", back_populates="usuario", uselist=False)
     administrador = relationship(
         "Administrador", back_populates="usuario", uselist=False)
+
+    def is_admin(role):
+        return role == 'admin'
 
 
 class Administrador(db.Model):
