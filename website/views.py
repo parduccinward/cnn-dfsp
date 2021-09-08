@@ -79,8 +79,17 @@ def admSistema():
 @login_required
 def pacientes():
     if not Usuario.is_admin(current_user.role):
-        all_data = Paciente.query.all()
-        return render_template("pacientes.html", user=current_user, pacientes=all_data)
+        medico = Medico.query.filter_by(usuario_id=current_user.id).first()
+        consulta = medicoPaciente.query.filter_by(
+            medico_id=medico.id).all()
+        id_pacientes = []
+        for i in consulta:
+            id_pacientes.append(i.paciente_id)
+
+        pacientes_medico = Paciente.query.filter(
+            Paciente.id.in_(id_pacientes)).all()
+        return render_template("pacientes.html", user=current_user, pacientes=pacientes_medico)
+
     else:
         flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
         return render_template("homeAdm.html", user=current_user)
@@ -153,8 +162,13 @@ def add_patient():
             direccion = request.form['direccionPaciente']
             new_patient = Paciente(nombre=nombre, apellido=apellido, sexo=sexo,
                                    fecha_nacimiento=fecha_nacimiento, email=email, direccion=direccion)
-            #new_assignment = medicoPaciente()
+            id_user = current_user.id
+            medico = Medico.query.filter_by(usuario_id=id_user).first()
             db.session.add(new_patient)
+            db.session.commit()
+            consulta = medicoPaciente(
+                medico_id=medico.id, paciente_id=new_patient.id)
+            db.session.add(consulta)
             db.session.commit()
             flash('Paciente creado exitosamente!', category="success")
         return render_template("homeMed.html", user=current_user)
@@ -189,6 +203,9 @@ def update_patient():
 @views.route('/delete_patient/<id>/', methods=['GET', 'POST'])
 def delete_patient(id):
     if not Usuario.is_admin(current_user.role):
+        consulta = medicoPaciente.query.filter_by(paciente_id=id).first()
+        db.session.delete(consulta)
+        db.session.commit()
         my_data = Paciente.query.get(id)
         db.session.delete(my_data)
         db.session.commit()

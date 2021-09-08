@@ -14,6 +14,9 @@ class Usuario(db.Model, UserMixin):
     administrador = relationship(
         "Administrador", back_populates="usuario", uselist=False)
 
+    def __init__(self, **kwargs):
+        super(Usuario, self).__init__(**kwargs)
+
     def is_admin(role):
         return role == 'admin'
 
@@ -23,6 +26,9 @@ class Administrador(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
     usuario = relationship("Usuario", back_populates="administrador")
+
+    def __init__(self, **kwargs):
+        super(Administrador, self).__init__(**kwargs)
 
 
 class Medico(db.Model):
@@ -38,6 +44,9 @@ class Medico(db.Model):
     pacientes = relationship("medicoPaciente", back_populates="medico")
     diagnosticos = relationship("Diagnostico", back_populates="medico")
 
+    def __init__(self, **kwargs):
+        super(Medico, self).__init__(**kwargs)
+
 
 class Paciente(db.Model):
     __tablename__ = 'paciente'
@@ -51,6 +60,9 @@ class Paciente(db.Model):
     medicos = relationship("medicoPaciente", back_populates="paciente")
     diagnosticos = relationship("Diagnostico", back_populates="paciente")
 
+    def __init__(self, **kwargs):
+        super(Paciente, self).__init__(**kwargs)
+
 
 class medicoPaciente(db.Model):
     __tablename__ = 'medicoPaciente'
@@ -60,6 +72,9 @@ class medicoPaciente(db.Model):
     paciente_id = db.Column(db.Integer, db.ForeignKey('paciente.id'))
     paciente = relationship("Paciente", back_populates="medicos")
 
+    def __init__(self, **kwargs):
+        super(medicoPaciente, self).__init__(**kwargs)
+
 
 class Prediccion(db.Model):
     __tablename__ = 'prediccion'
@@ -68,12 +83,18 @@ class Prediccion(db.Model):
     porcentaje = db.Column(db.Float)
     diagnostico = relationship("Diagnostico", back_populates="prediccion")
 
+    def __init__(self, **kwargs):
+        super(Prediccion, self).__init__(**kwargs)
+
 
 class Enfermedad(db.Model):
     __tablename__ = 'enfermedad'
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(150))
     diagnostico = relationship("Diagnostico", back_populates="enfermedad")
+
+    def __init__(self, **kwargs):
+        super(Enfermedad, self).__init__(**kwargs)
 
 
 class Diagnostico(db.Model):
@@ -90,3 +111,6 @@ class Diagnostico(db.Model):
     id_enfermedad = db.Column(db.Integer, db.ForeignKey('enfermedad.id'))
     enfermedad = relationship(
         "Enfermedad", back_populates="diagnostico", uselist=False)
+
+    def __init__(self, **kwargs):
+        super(Diagnostico, self).__init__(**kwargs)
