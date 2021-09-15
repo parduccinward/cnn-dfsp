@@ -1,7 +1,7 @@
 import os
 import uuid
 import urllib
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, session
 from flask_login import login_user, login_required, current_user
 from tensorflow.keras.models import load_model
 from datetime import date
@@ -9,10 +9,13 @@ from .models import Paciente, Medico, Prediccion, Enfermedad, Diagnostico, medic
 from .auth import requires_roles
 from PIL import Image
 import numpy as np
+import smtplib
 from . import db
 from .img_classification import get_prediction, predict
 from .trainining_process import train_models
 from .tasks import training
+from email.message import EmailMessage
+
 views = Blueprint('views', __name__)
 
 ALLOWED_EXT = set(['jpg', 'jpeg', 'png'])
@@ -106,6 +109,76 @@ def diagnostico(id):
         return render_template("homeAdm.html", user=current_user)
 
 
+@views.route('/enviarReporte/<id>/', methods=['GET', 'POST'])
+@login_required
+def enviarReporte(id):
+    if not Usuario.is_admin(current_user.role):
+        msg = EmailMessage()
+        reporte_medico = request.args.get("reporte_medico")
+        enfermedad = request.args.get("diseases")
+        msg.set_content(reporte_medico)
+        user = current_user.id
+        medico = Medico.query.filter_by(usuario_id=user).first()
+        msg['Subject'] = "Diagnóstico médico realizado por " + \
+            medico.nombre+" "+medico.apellido
+        msg['From'] = "sistema.ai.cad@gmail.com"
+        paciente_objetivo = Paciente.query.filter_by(id=id).first()
+        email_paciente = paciente_objetivo.email
+        msg['To'] = email_paciente
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login("sistema.ai.cad@gmail.com", os.getenv("MAIL_PASSWORD"))
+        server.send_message(msg)
+        server.quit()
+        prediccion_paciente = session.get('prediccion_paciente', None)
+        print(prediccion_paciente)
+        new_diagnostico = Diagnostico(
+            descripcion=reporte_medico, id_paciente=paciente_objetivo.id, id_medico=medico.id, id_prediccion=prediccion_paciente, id_enfermedad=enfermedad)
+        db.session.add(new_diagnostico)
+        db.session.commit()
+        # Enviar correo
+        flash('Se envio un reporte al correo electronico del paciente.',
+              category="success")
+        return render_template("homeMed.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeAdm.html", user=current_user)
+
+
+@views.route('/enviarReporteSinSistema/<id>/', methods=['GET', 'POST'])
+@login_required
+def enviarReporteSinSistema(id):
+    if not Usuario.is_admin(current_user.role):
+        msg = EmailMessage()
+        reporte_medico = request.args.get("reporte_medico")
+        enfermedad = request.args.get("diseases")
+        msg.set_content(reporte_medico)
+        user = current_user.id
+        medico = Medico.query.filter_by(usuario_id=user).first()
+        msg['Subject'] = "Diagnóstico médico realizado por " + \
+            medico.nombre+" "+medico.apellido
+        msg['From'] = "sistema.ai.cad@gmail.com"
+        paciente_objetivo = Paciente.query.filter_by(id=id).first()
+        email_paciente = paciente_objetivo.email
+        msg['To'] = email_paciente
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login("sistema.ai.cad@gmail.com", os.getenv("MAIL_PASSWORD"))
+        server.send_message(msg)
+        server.quit()
+        new_diagnostico = Diagnostico(
+            descripcion=reporte_medico, id_paciente=paciente_objetivo.id, id_medico=medico.id, id_prediccion=None, id_enfermedad=enfermedad)
+        db.session.add(new_diagnostico)
+        db.session.commit()
+        # Enviar correo
+        flash('Se envio un reporte al correo electronico del paciente.',
+              category="success")
+        return render_template("homeMed.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeAdm.html", user=current_user)
+
+
 @views.route('/prediccion')
 @login_required
 def prediccion():
@@ -131,7 +204,20 @@ def diagnostico_paciente():
 def reporte(id):
     if not Usuario.is_admin(current_user.role):
         paciente = Paciente.query.get(id)
-        return render_template("reporte.html", user=current_user, paciente=paciente)
+        enfermedades = Enfermedad.query.all()
+        return render_template("reporte.html", user=current_user, paciente=paciente, enfermedades=enfermedades)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeAdm.html", user=current_user)
+
+
+@views.route('/reporteSinSistema/<id>/', methods=['GET', 'POST'])
+@login_required
+def reporteSinSistema(id):
+    if not Usuario.is_admin(current_user.role):
+        paciente = Paciente.query.get(id)
+        enfermedades = Enfermedad.query.all()
+        return render_template("reporteSinSistema.html", user=current_user, paciente=paciente, enfermedades=enfermedades)
     else:
         flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
         return render_template("homeAdm.html", user=current_user)
@@ -329,7 +415,11 @@ def resultadoDiagnostico(id):
                         "prob2": prob_result[1],
                         "prob3": prob_result[2],
                     }
-
+                    new_prediccion = Prediccion(
+                        imagen=img, porcentaje=prob_result[0])
+                    db.session.add(new_prediccion)
+                    db.session.commit()
+                    session['prediccion_paciente'] = new_prediccion.id
                     disease = class_result[0]
                     if (disease == "benigno"):
                         disease = "Dermatofibroma (Tumor benigno)"
@@ -356,7 +446,7 @@ def resultadoDiagnostico(id):
                 else:
                     flash(
                         'Por favor introduce una imagen con extensión jpg, jpeg o png.', category="error")
-                    return render_template('prediccionDiagnostico.html', error=error, user=current_user)
+                    return render_template('prediccionDiagnostico.html', error=error, user=current_user, paciente=paciente)
 
         else:
             return render_template('prediccionDiagnostico.html', user=current_user)

@@ -9,14 +9,15 @@ from datetime import timedelta
 
 
 db = SQLAlchemy()
-DB_NAME = "database.db"
+DB_NAME = os.getenv('DB_NAME')
 
 __all__ = ('celery_app',)
 
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'd$u$43!B2REHBfkv'
+    APP_SECRET_KEY = os.getenv('APP_SECRET_KEY')
+    app.config['SECRET_KEY'] = APP_SECRET_KEY
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['REMEMBER_COOKIE_DURATION'] = timedelta(minutes=15)
     db.init_app(app)

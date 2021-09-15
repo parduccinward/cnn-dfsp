@@ -79,7 +79,7 @@ class medicoPaciente(db.Model):
 class Prediccion(db.Model):
     __tablename__ = 'prediccion'
     id = db.Column(db.Integer, primary_key=True)
-    imagen = db.Column(db.LargeBinary)
+    imagen = db.Column(db.String(150))
     porcentaje = db.Column(db.Float)
     diagnostico = relationship("Diagnostico", back_populates="prediccion")
 

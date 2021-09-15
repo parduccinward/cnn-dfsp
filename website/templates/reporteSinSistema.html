@@ -3,7 +3,7 @@
 {% block content %}
 <div class ="jumbotron p-3">
     <h4>Registrar el diagnóstico de <b>{{paciente.nombre}}</b></h4>
-    <form action="/enviarReporte/{{paciente.id}}"  name="reporte_medico"onSubmit="return confirm('El reporte se enviará al correo electrónico del paciente. Está seguro de querer hacerlo?');">
+    <form action="/enviarReporteSinSistema/{{paciente.id}}"  name="reporte_medico"onSubmit="return confirm('El reporte se enviará al correo electrónico del paciente. Está seguro de querer hacerlo?');">
         <textarea style=" width: 100% ; display: flex; justify-content: center; padding-bottom: 25px; margin-top: 20px"name="reporte_medico" cols="50" rows="10"></textarea><br>
         
         <select name="diseases" id="diseases">
