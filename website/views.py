@@ -15,6 +15,7 @@ from .img_classification import get_prediction, predict
 from .trainining_process import train_models
 from .tasks import training
 from email.message import EmailMessage
+from datetime import datetime
 
 views = Blueprint('views', __name__)
 
@@ -98,6 +99,20 @@ def pacientes():
         return render_template("homeAdm.html", user=current_user)
 
 
+@views.route('/historialMedico/<id>/', methods=['GET', 'POST'])
+@login_required
+def historialMedico(id):
+    if not Usuario.is_admin(current_user.role):
+        diagnosticos = Diagnostico.query.filter_by(
+            id_paciente=id).all()
+        print(diagnosticos)
+        return render_template("historialMedico.html", user=current_user, diagnosticos=diagnosticos)
+
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeAdm.html", user=current_user)
+
+
 @views.route('/diagnostico/<id>/', methods=['GET', 'POST'])
 @login_required
 def diagnostico(id):
@@ -131,9 +146,9 @@ def enviarReporte(id):
         server.send_message(msg)
         server.quit()
         prediccion_paciente = session.get('prediccion_paciente', None)
-        print(prediccion_paciente)
+        fecha = date.today()
         new_diagnostico = Diagnostico(
-            descripcion=reporte_medico, id_paciente=paciente_objetivo.id, id_medico=medico.id, id_prediccion=prediccion_paciente, id_enfermedad=enfermedad)
+            descripcion=reporte_medico, id_paciente=paciente_objetivo.id, id_medico=medico.id, id_prediccion=prediccion_paciente, id_enfermedad=enfermedad, fecha=fecha)
         db.session.add(new_diagnostico)
         db.session.commit()
         # Enviar correo
@@ -166,8 +181,9 @@ def enviarReporteSinSistema(id):
         server.login("sistema.ai.cad@gmail.com", os.getenv("MAIL_PASSWORD"))
         server.send_message(msg)
         server.quit()
+        fecha = date.today()
         new_diagnostico = Diagnostico(
-            descripcion=reporte_medico, id_paciente=paciente_objetivo.id, id_medico=medico.id, id_prediccion=None, id_enfermedad=enfermedad)
+            descripcion=reporte_medico, id_paciente=paciente_objetivo.id, id_medico=medico.id, id_prediccion=None, id_enfermedad=enfermedad, fecha=fecha)
         db.session.add(new_diagnostico)
         db.session.commit()
         # Enviar correo
@@ -339,10 +355,13 @@ def resultado():
         if request.method == 'POST':
             if (request.files):
                 file = request.files['file']
-                if file and allowed_file(file.filename):
-                    file.save(os.path.join(target_img, file.filename))
-                    img_path = os.path.join(target_img, file.filename)
-                    img = file.filename
+                unique_filename = str(uuid.uuid4())
+                if file and allowed_file(unique_filename+file.filename):
+                    file.save(os.path.join(
+                        target_img, unique_filename+file.filename))
+                    img_path = os.path.join(
+                        target_img, unique_filename+file.filename)
+                    img = unique_filename+file.filename
 
                     class_result, prob_result = predict(img_path, model)
 
@@ -400,10 +419,13 @@ def resultadoDiagnostico(id):
         if request.method == 'POST':
             if (request.files):
                 file = request.files['file']
-                if file and allowed_file(file.filename):
-                    file.save(os.path.join(target_img, file.filename))
-                    img_path = os.path.join(target_img, file.filename)
-                    img = file.filename
+                unique_filename = str(uuid.uuid4())
+                if file and allowed_file(unique_filename+file.filename):
+                    file.save(os.path.join(
+                        target_img, unique_filename+file.filename))
+                    img_path = os.path.join(
+                        target_img, unique_filename+file.filename)
+                    img = unique_filename+file.filename
 
                     class_result, prob_result = predict(img_path, model)
 

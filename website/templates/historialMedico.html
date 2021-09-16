@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block title %}Inicio{% endblock %}
+
+{% block content %} 
+
+<div class ="jumbotron p-3">
+    <table class="table table-hover table-active">
+
+        <h2>Historial Médico</h2>
+
+        <tr>
+            <th>N°</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+        </tr>
+
+            {% for row in diagnosticos %}
+            <tr>
+            <td>{{loop.index}}</td>
+            <td>{{row.descripcion}}</td>
+            <td>{{row.fecha}}</td>
+
+        </tr>
+
+            {% endfor %}
+        
+    </table>
+    <row style = "width: 100% ; display: flex; justify-content: center; padding-bottom: 15px;">
+        <div style="margin-right: 30px;">
+            <a href="/pacientes" class="btn btn-secondary btn-xs">Volver a pacientes</a>
+        </div>
+    </row>
+</div>
+{% endblock %}

@@ -2,6 +2,7 @@ from os import name
 from . import db
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship
+from datetime import date
 
 
 class Usuario(db.Model, UserMixin):
@@ -111,6 +112,7 @@ class Diagnostico(db.Model):
     id_enfermedad = db.Column(db.Integer, db.ForeignKey('enfermedad.id'))
     enfermedad = relationship(
         "Enfermedad", back_populates="diagnostico", uselist=False)
+    fecha = db.Column(db.Date, default=date.today())
 
     def __init__(self, **kwargs):
         super(Diagnostico, self).__init__(**kwargs)
