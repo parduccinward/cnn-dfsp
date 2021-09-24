@@ -34,17 +34,17 @@
             {% if user.role == "admin" %}
             <a class="nav-item nav-link" id="home" href="/homeAdm">Inicio</a>
             <a class="nav-item nav-link" id="usuarios" href="/admUsuarios">Usuarios</a>
-            <a class="nav-item nav-link" id="rmedicos" href="/regMedicos">Registrar Medico</a>
+            <a class="nav-item nav-link" id="rmedicos" href="/regMedicos">Médicos</a>
             <a class="nav-item nav-link" id="admsistema" href="/admSistema">Adm. Sistema</a>
-            <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+            <a class="nav-item nav-link" id="logout" href="/logout">Salir</a>
             {% else %}
             <a class="nav-item nav-link" id="home" href="/homeMed">Inicio</a>
             <a class="nav-item nav-link" id="pacientes" href="/pacientes">Pacientes</a>
             <a class="nav-item nav-link" id="prediccion" href="/prediccion">Sistema Inteligente</a>
-            <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+            <a class="nav-item nav-link" id="logout" href="/logout">Salir</a>
             {% endif %}
           {% else %}
-          <a class="nav-item nav-link" id="login" href="/login">Login</a>
+          <a class="nav-item nav-link" id="login" href="/login">Autenticarse</a>
           {% endif %}
         </div>
       </div>

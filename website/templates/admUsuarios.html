@@ -9,19 +9,28 @@
         <tr>
             <th>ID</th>
             <th>Usuario</th>
-            <th>Acciones</th>
         </tr>
 
+            {% for row in usuarios %}
             <tr>
-            <td>1</td>
-            <td>admin</td>
+            <td>{{loop.index}}</td>
+            <td>{{row.username}}</td>
             <td>
-                <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="">Editar</a>
-                <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Estas seguro que quieres eliminar este paciente?')">Eliminar</a>
+                <a href="/delete_user/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Estas seguro que quieres eliminar este usuario?')">Eliminar</a>
             </td>
         </tr>
     
-    </table>    
+            {% endfor %}
+    
+    </table>
+</div>
+  
+  
+       </div>
+  
+  
+    </div>
+  
   
  </div>
 {% endblock %}

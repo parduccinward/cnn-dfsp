@@ -1,14 +1,151 @@
 {% extends "base.html" %} {% block title %}Inicio{% endblock %}
 
 {% block content %}
-<form method="post" action=""></form>
-<input type="text" class="form-control" name="nombreMedico" placeholder="Nombre" required>
-    <input type="text" class="form-control" name="apellidoMedico" placeholder="Apellido" required>
-    <input type="email" class="form-control" name="emailMedico" placeholder="Email" required>
-    <input type="number" class="form-control" name="numeroMedico" placeholder="Telefono" required>
-    <input type="text" class="form-control" name="especialidadMedico" placeholder="Especialidad" required>
-    <button class="btn btn-primary btn-block">
-      Guardar Medico
-    </button>
-  </form>
+<div class ="jumbotron p-3">
+  <table class="table table-hover table-active">
+
+      <h2>Administrar<b> Médicos</b> <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#mymodal">Agregar Nuevo Médico</button></h2>
+
+      <tr>
+          <th>N°</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Telefono</th>
+          <th>Especialidad</th>
+          <th>Accion</th>
+      </tr>
+
+          {% for row in medicos %}
+          <tr>
+          <td>{{loop.index}}</td>
+          <td>{{row.nombre}}</td>
+          <td>{{row.apellido}}</td>
+          <td>{{row.telefono}}</td>
+          <td>{{row.especialidad}}</td>
+          <td>
+              <a href="/update_medico/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Editar</a>
+              <a href="/delete_medico/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Estás seguro que quieres eliminar este médico?')">Eliminar</a>
+          </td>
+      </tr>
+
+
+      <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+             <div class="modal-content">
+        
+                <div class="modal-header">
+                   <h4 class="modal-title">Actualizar información</h4>
+                </div>
+        
+        
+                <div class="modal-body">
+                   <form action="{{url_for('views.update_medico')}}" method="POST">
+        
+                      <div class="form-group">
+                         <label>Nombre:</label>
+                          <input type="hidden"  name="id" value="{{row.id}}">
+                          <input type="text" class="form-control" name="nombreMedico" value="{{row.nombre}}">
+                      </div>
+        
+                      <div class="form-group">
+                          <label>Apellido:</label>
+                           <input type="text" class="form-control" name="apellidoMedico" value="{{row.apellido}}">
+                       </div>
+
+                       <div class="form-group">
+                        <label>Email:</label>
+                         <input type="email" class="form-control" name="emailMedico" value="{{row.email}}">
+                     </div>
+
+                       <div class="form-group">
+                        <label>Telefono:</label>
+                         <input type="tel" class="form-control" name="telefonoMedico" value="{{row.telefono}}">
+                     </div>
+
+                      <div class="form-group">
+                          <label>Especialidad:</label>
+                          <input type="text" class="form-control" name="especialidadMedico" value="{{row.especialidad}}">
+                      </div>
+  
+                      <div class="form-group">
+                          <button class="btn btn-primary" type="submit">Actualizar</button>
+                      </div>
+        
+        
+                   </form>
+                </div>
+        
+        
+                <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+        
+        
+             </div>
+        
+          </div>
+       </div>
+
+  
+          {% endfor %}
+  
+  </table>
+</div>
+
+<div id="mymodal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h4 class="modal-title">Agregar médico</h4>
+        </div>
+
+
+        <div class="modal-body">
+
+           <form action="{{url_for('views.add_medico')}}" method="POST">
+              <div class="form-group">
+                 <label>Nombre:</label>
+                 <input type="text" class="form-control" name="nombreMedico" required="1">
+              </div>
+
+              <div class="form-group">
+                  <label>Apellido:</label>
+                  <input type="text" class="form-control" name="apellidoMedico" required="1">
+               </div>
+
+               <div class="form-group">
+                  <label>Email:</label>
+                   <input type="email" class="form-control" name="emailMedico" required="1">
+               </div>
+
+               <div class="form-group">
+                  <label>Telefono:</label>
+                   <input type="tel" class="form-control" name="telefonoMedico" required="1">
+               </div>
+
+               <div class="form-group">
+                  <label>Especialidad:</label>
+                  <input type="text" class="form-control" name="especialidadMedico" required="1">
+              </div>
+
+              <div class="form-group">
+                 <button class="btn btn-primary" type="submit">Agregar Médico</button>
+              </div>
+           </form>
+
+        </div>
+
+
+        <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+
+
+     </div>
+
+
+  </div>
+
+
+</div>
 {% endblock %}

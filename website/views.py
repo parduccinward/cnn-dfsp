@@ -53,7 +53,8 @@ def homeMed():
 @login_required
 def admUsuarios():
     if Usuario.is_admin(current_user.role):
-        return render_template("admUsuarios.html", user=current_user)
+        usuarios = Usuario.query.all()
+        return render_template("admUsuarios.html", user=current_user, usuarios=usuarios)
     else:
         flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
         return render_template("homeMed.html", user=current_user)
@@ -63,7 +64,8 @@ def admUsuarios():
 @login_required
 def regMedicos():
     if Usuario.is_admin(current_user.role):
-        return render_template("regMedicos.html", user=current_user)
+        medicos = Medico.query.all()
+        return render_template("regMedicos.html", user=current_user, medicos=medicos)
     else:
         flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
         return render_template("homeMed.html", user=current_user)
@@ -311,11 +313,86 @@ def delete_patient(id):
         my_data = Paciente.query.get(id)
         db.session.delete(my_data)
         db.session.commit()
-        flash('Paciente actualizado!', category="success")
+        flash('Paciente eliminado!', category="success")
         return render_template("homeMed.html", user=current_user)
     else:
         flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
         return render_template("homeAdm.html", user=current_user)
+
+
+@views.route('/add_medico', methods=['GET', 'POST'])
+def add_medico():
+    if Usuario.is_admin(current_user.role):
+        if request.method == 'POST':
+            nombre = request.form['nombreMedico']
+            apellido = request.form['apellidoMedico']
+            email = request.form['emailMedico']
+            telefono = request.form['telefonoMedico']
+            especialidad = request.form['especialidadMedico']
+            new_medico = Medico(nombre=nombre, apellido=apellido, email=email,
+                                telefono=telefono, especialidad=especialidad)
+            db.session.add(new_medico)
+            db.session.commit()
+
+            user = nombre[0].lower()
+            username = user + apellido.lower()
+            print(username)
+            # Almacenar usuario y generar contraseña segura
+            # Enviar via correo al medico
+
+            flash('Médico creado exitosamente!', category="success")
+        return render_template("homeAdm.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeMed.html", user=current_user)
+
+
+@views.route('/update_medico', methods=['GET', 'POST'])
+def update_medico():
+
+    if Usuario.is_admin(current_user.role):
+        if request.method == 'POST':
+            medico = Medico.query.get(request.form.get('id'))
+            medico.nombre = request.form['nombreMedico']
+            medico.apellido = request.form['apellidoMedico']
+            medico.email = request.form['emailMedico']
+            medico.telefono = request.form['telefonoMedico']
+            medico.especialidad = request.form['especialidadMedico']
+            db.session.commit()
+            flash('Médico actualizado!', category="success")
+        return render_template("homeAdm.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeMed.html", user=current_user)
+
+
+@views.route('/delete_medico/<id>/', methods=['GET', 'POST'])
+def delete_medico(id):
+    if Usuario.is_admin(current_user.role):
+        my_data = Medico.query.get(id)
+        db.session.delete(my_data)
+        db.session.commit()
+        flash('Medico eliminado!', category="success")
+        return render_template("homeAdm.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeMed.html", user=current_user)
+
+
+@views.route('/delete_user/<id>/', methods=['GET', 'POST'])
+def delete_user(id):
+    if Usuario.is_admin(current_user.role):
+        medico = Medico.query.filter_by(usuario_id=id).first()
+        db.session.delete(medico)
+        db.session.commit()
+        usuario = Usuario.query.get(id)
+        db.session.delete(usuario)
+        db.session.commit()
+        flash('Usuario eliminado!', category="success")
+        return render_template("homeAdm.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeMed.html", user=current_user)
 
 
 @views.route('/loading', methods=['GET', 'POST'])
