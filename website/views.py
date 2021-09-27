@@ -13,9 +13,11 @@ import smtplib
 from . import db
 from .img_classification import get_prediction, predict
 from .trainining_process import train_models
+from .password_generator import generate_random_password
 from .tasks import training
 from email.message import EmailMessage
 from datetime import datetime
+from werkzeug.security import generate_password_hash
 
 views = Blueprint('views', __name__)
 
@@ -329,16 +331,31 @@ def add_medico():
             email = request.form['emailMedico']
             telefono = request.form['telefonoMedico']
             especialidad = request.form['especialidadMedico']
-            new_medico = Medico(nombre=nombre, apellido=apellido, email=email,
-                                telefono=telefono, especialidad=especialidad)
-            db.session.add(new_medico)
-            db.session.commit()
-
             user = nombre[0].lower()
             username = user + apellido.lower()
-            print(username)
-            # Almacenar usuario y generar contraseña segura
-            # Enviar via correo al medico
+            password = generate_random_password()
+            new_user = Usuario(username=username, password=generate_password_hash(
+                password, method='sha256'))
+            db.session.add(new_user)
+            db.session.commit()
+            new_medico = Medico(nombre=nombre, apellido=apellido, email=email,
+                                telefono=telefono, especialidad=especialidad, usuario_id=new_user.id)
+            db.session.add(new_medico)
+            db.session.commit()
+            msg = EmailMessage()
+            mensaje = "Dr. " + apellido + ":\r\n\r\nEl sistema DermAI asignó una cuenta para que pueda autenticarse en el sistema. Le pedimos por favor que no comparta sus credenciales con ninguna otra persona, y que elimine el siguiente mensaje posteriormente. Las credenciales de su cuenta son las siguientes:\r\n\r\nusuario: " + \
+                username + "\r\ncontraseña: " + password + \
+                "\r\n\r\nAtentamente,\r\n\r\nAdministrador DermAI"
+            msg.set_content(mensaje)
+            msg['Subject'] = "Nueva cuenta sistema CAD DermAI"
+            msg['From'] = "sistema.ai.cad@gmail.com"
+            msg['To'] = email
+            server = smtplib.SMTP("smtp.gmail.com", 587)
+            server.starttls()
+            server.login("sistema.ai.cad@gmail.com",
+                         os.getenv("MAIL_PASSWORD"))
+            server.send_message(msg)
+            server.quit()
 
             flash('Médico creado exitosamente!', category="success")
         return render_template("homeAdm.html", user=current_user)
@@ -382,9 +399,6 @@ def delete_medico(id):
 @views.route('/delete_user/<id>/', methods=['GET', 'POST'])
 def delete_user(id):
     if Usuario.is_admin(current_user.role):
-        medico = Medico.query.filter_by(usuario_id=id).first()
-        db.session.delete(medico)
-        db.session.commit()
         usuario = Usuario.query.get(id)
         db.session.delete(usuario)
         db.session.commit()
