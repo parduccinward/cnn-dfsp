@@ -9,15 +9,24 @@
         <tr>
             <th>ID</th>
             <th>Usuario</th>
+            <td></td>
         </tr>
 
             {% for row in usuarios %}
+            {% if row.username=="admin"%}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{row.username}}</td>
+                <td></td>
+            </tr>
+            {% else -%}
             <tr>
             <td>{{loop.index}}</td>
             <td>{{row.username}}</td>
             <td>
                 <a href="/delete_user/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Estas seguro que quieres eliminar este usuario?')">Eliminar</a>
             </td>
+            {% endif %}
         </tr>
     
             {% endfor %}

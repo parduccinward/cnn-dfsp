@@ -1,0 +1,107 @@
+{% extends "base.html" %} {% block title %}Inicio{% endblock %}
+
+{% block content %} 
+<form method="post" action="/loading" enctype="multipart/form-data">
+    <h3 align="center">Escoge Hipérparametros para realizar nuevos entrenamientos:</h3>
+    <div class="form-group">
+      <div>
+        <label for="f1">Cantidad de Filtros capa de Convolución #1:</label>
+        <select name="f1_min" id="f1_min" required>
+          <option value=""class="optionGroup" selected disabled>Mínimo</option>
+          <option value="32">&nbsp;&nbsp;&nbsp;&nbsp;32</option>
+          <option value="64">&nbsp;&nbsp;&nbsp;&nbsp;64</option>
+          <option value="96">&nbsp;&nbsp;&nbsp;&nbsp;96</option>
+        </select>
+        <select name="f1_max" id="f1_max" required>
+          <option value=""class="optionGroup" selected disabled>Máximo</option>
+          <option value="192">&nbsp;&nbsp;&nbsp;&nbsp;192</option>
+          <option value="224">&nbsp;&nbsp;&nbsp;&nbsp;224</option>
+          <option value="256">&nbsp;&nbsp;&nbsp;&nbsp;256</option>
+                </select>
+      </div>
+      <div>
+        <label for="d1">Cantidad de Dropout #1:</label>
+        <select name="d1_min" id="d1_min" required>
+          <option value=""class="optionGroup" selected disabled>Mínimo</option>
+          <option value="0.10">&nbsp;&nbsp;&nbsp;&nbsp;0.10</option>
+          <option value="0.15">&nbsp;&nbsp;&nbsp;&nbsp;0.15</option>
+          <option value="0.20">&nbsp;&nbsp;&nbsp;&nbsp;0.20</option>
+        </select>
+        <select name="d1_max" id="d1_max" required>
+          <option value=""class="optionGroup" selected disabled>Máximo</option>
+          <option value="0.30">&nbsp;&nbsp;&nbsp;&nbsp;0.30</option>
+          <option value="0.35">&nbsp;&nbsp;&nbsp;&nbsp;0.35</option>
+          <option value="0.40">&nbsp;&nbsp;&nbsp;&nbsp;0.40</option>
+                </select>
+      </div>
+      <div>
+        <label for="f2">Cantidad de Filtros capa de Convolución #2:</label>
+        <select name="f2_min" id="f2_min" required>
+          <option value=""class="optionGroup" selected disabled>Mínimo</option>
+          <option value="32">&nbsp;&nbsp;&nbsp;&nbsp;32</option>
+          <option value="64">&nbsp;&nbsp;&nbsp;&nbsp;64</option>
+          <option value="96">&nbsp;&nbsp;&nbsp;&nbsp;96</option>
+        </select>
+        <select name="f2_max" id="f2_max" required>
+          <option value=""class="optionGroup" selected disabled>Máximo</option>
+          <option value="192">&nbsp;&nbsp;&nbsp;&nbsp;192</option>
+          <option value="224">&nbsp;&nbsp;&nbsp;&nbsp;224</option>
+          <option value="256">&nbsp;&nbsp;&nbsp;&nbsp;256</option>
+                </select>
+          </div>
+      <div>
+        <label for="d2">Cantidad de Dropout #2:</label>
+        <select name="d2_min" id="d2_min" required>
+          <option value=""class="optionGroup" selected disabled>Mínimo</option>
+          <option value="0.10">&nbsp;&nbsp;&nbsp;&nbsp;0.10</option>
+          <option value="0.15">&nbsp;&nbsp;&nbsp;&nbsp;0.15</option>
+          <option value="0.20">&nbsp;&nbsp;&nbsp;&nbsp;0.20</option>
+        </select>
+        <select name="d2_max" id="d2_max" required>
+          <option value=""class="optionGroup" selected disabled>Máximo</option>
+          <option value="0.30">&nbsp;&nbsp;&nbsp;&nbsp;0.30</option>
+          <option value="0.35">&nbsp;&nbsp;&nbsp;&nbsp;0.35</option>
+          <option value="0.40">&nbsp;&nbsp;&nbsp;&nbsp;0.40</option>
+                </select>
+          </div>
+      <div>
+        <label for="batch">Tamaño del batch:</label>
+        <select name="batch" id="batch" required>
+          <option value=""class="optionGroup" selected disabled>Batch</option>
+          <option value="10">&nbsp;&nbsp;&nbsp;&nbsp;10</option>
+          <option value="20">&nbsp;&nbsp;&nbsp;&nbsp;20</option>
+          <option value="30">&nbsp;&nbsp;&nbsp;&nbsp;30</option>
+          <option value="60">&nbsp;&nbsp;&nbsp;&nbsp;60</option>
+        </select>
+          </div>
+      <div>
+        <label for="epoch">Épocas (epochs):</label>
+        <select name="epoch" id="epoch" required>
+          <option value=""class="optionGroup" selected disabled>Épocas</option>
+          <option value="40">&nbsp;&nbsp;&nbsp;&nbsp;40</option>
+          <option value="50">&nbsp;&nbsp;&nbsp;&nbsp;50</option>
+          <option value="60">&nbsp;&nbsp;&nbsp;&nbsp;60</option>
+          <option value="70">&nbsp;&nbsp;&nbsp;&nbsp;70</option>
+        </select>
+          </div>
+      <div>
+        <label for="combinations">Número de combinaciones a intentar en el entrenamiento:</label>
+        <select name="combinations" id="combinations" required>
+          <option value=""class="optionGroup" selected disabled>Combinaciones</option>
+          <option value="1">&nbsp;&nbsp;&nbsp;&nbsp;1</option>
+          <option value="2">&nbsp;&nbsp;&nbsp;&nbsp;2</option>
+          <option value="3">&nbsp;&nbsp;&nbsp;&nbsp;3</option>
+          <option value="4">&nbsp;&nbsp;&nbsp;&nbsp;4</option>
+          <option value="5">&nbsp;&nbsp;&nbsp;&nbsp;5</option>
+          <option value="6">&nbsp;&nbsp;&nbsp;&nbsp;6</option>
+          <option value="7">&nbsp;&nbsp;&nbsp;&nbsp;7</option>
+          <option value="8">&nbsp;&nbsp;&nbsp;&nbsp;8</option>
+          <option value="9">&nbsp;&nbsp;&nbsp;&nbsp;9</option>
+          <option value="10">&nbsp;&nbsp;&nbsp;&nbsp;10</option>
+        </select>
+          </div>
+    </div>
+          <br/>
+    <button type="submit" class="btn btn-primary" >Realizar Entrenamiento</button>
+  </form>
+{% endblock %}

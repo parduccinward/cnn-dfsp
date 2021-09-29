@@ -41,6 +41,26 @@ def homeAdm():
         return render_template("homeMed.html", user=current_user)
 
 
+@views.route('/entrenamiento')
+@login_required
+def entrenamiento():
+    if Usuario.is_admin(current_user.role):
+        return render_template("entrenamiento.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeMed.html", user=current_user)
+
+
+@views.route('/subirImagenes')
+@login_required
+def subirImagenes():
+    if Usuario.is_admin(current_user.role):
+        return render_template("subirImagenes.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeMed.html", user=current_user)
+
+
 @views.route('/homeMed')
 @login_required
 def homeMed():
