@@ -61,6 +61,59 @@ def subirImagenes():
         return render_template("homeMed.html", user=current_user)
 
 
+@views.route('/subirBenigno')
+@login_required
+def subirBenigno():
+    if Usuario.is_admin(current_user.role):
+        return render_template("subirBenigno.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeMed.html", user=current_user)
+
+
+@views.route('/aumentarDatasetBenigno', methods=['GET', 'POST'])
+@login_required
+def aumentarDatasetBenigno():
+    if Usuario.is_admin(current_user.role):
+        uploaded_files = request.files.getlist("file[]")
+        print(uploaded_files)
+        flash('Se subieron las imagenes correctamente.', category="success")
+        return render_template("homeAdm.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeMed.html", user=current_user)
+
+
+@views.route('/subirCarcinoma')
+@login_required
+def subirCarcinoma():
+    if Usuario.is_admin(current_user.role):
+        return render_template("subirCarcinoma.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeMed.html", user=current_user)
+
+
+@views.route('/subirDfsp')
+@login_required
+def subirDfsp():
+    if Usuario.is_admin(current_user.role):
+        return render_template("subirDfsp.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeMed.html", user=current_user)
+
+
+@views.route('/subirMelanoma')
+@login_required
+def subirMelanoma():
+    if Usuario.is_admin(current_user.role):
+        return render_template("subirMelanoma.html", user=current_user)
+    else:
+        flash('La página ingresada es inexistente o no cuentas con los permisos necesarios.', category="error")
+        return render_template("homeMed.html", user=current_user)
+
+
 @views.route('/homeMed')
 @login_required
 def homeMed():

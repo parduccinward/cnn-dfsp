@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block title %}Inicio{% endblock %}
+
+{% block content %} 
+<h6 class = "header-text">Escoge un archivo JPG o PNG:</h6><br>
+<form class="form-horizontal" action="/aumentarDatasetBenigno" method="post" enctype="multipart/form-data">  
+        <input type="file" accept="image/png, image/jpeg" class="file-form-input"  name="file[]" multiple="" id="pwd" ><br>      
+            <button type="submit" class="btn btn-success">Subir Imagen</button>
+    </div>
+    </row>
+    </div>
+  </form>
+{% endblock %}
