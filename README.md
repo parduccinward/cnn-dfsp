@@ -1,17 +1,23 @@
-# Sistema Inteligente para la Clasificación de Lesiones Cutáneas utilizando una CNN
+# Skin Cancer Diagnosis System
 
-Este proyecto es alimentado por 260 Imágenes de lesiones de la piel alojadas en AWS S3 utilizando un notebook en Sagemaker AWS para el entrenamiento de una red neuronal convolucional. En este codigo se implementan la clasificación de las siguientes enfermedades:
+##Description
 
-1. Lesiones benignas
-2. Carcinoma de Células Basales
-3. Dermatofibrosarcoma Protuberans
+This project is an AI system that can recognize rare skin cancer through images, allows you to authenticate as a doctor, and manage diagnoses (CRUD) uploading images to verify if it is a disease or not. The system consumes a previously trained model on <a href="https://aws.amazon.com/">AWS</a>, the backend is built with Flask and uses the <a href="https://www.tensorflow.org/api_docs/python/tf/keras/Model">tf.Keras.Model</a> module to consume this model. The front-end is built with <a href="https://stackoverflow.com/questions/20435653/what-is-vanillajs">VanillaJS</a> and HTML.
+
+##CNN
+
+This project uses 260 images of skin lesions to train a neural network. This code implements the classification of the following diseases:
+
+1. Benign tumours
+2. Basal cell carcinoma
+3. Dermatofibrosarcoma protuberans
 4. Melanoma
 
 ![Clasificacion de Lesiones Cutaneas via CNN](/assets/images/CNN_DFSP.png)
 
-# Tecnologías empleadas para el desarrollo del Sistema
+## Technologies used:
 
-### Entrenamiento:
+### Training:
 
 - Python
 - Jupyter Notebooks
@@ -21,12 +27,12 @@ Este proyecto es alimentado por 260 Imágenes de lesiones de la piel alojadas en
 - numpy
 - boto3
 
-### Hosting del Modelo
+### Model Hosting
 
 - AWS S3
 - AWS Sagemaker
 
-### Desarrollo Web
+### Web Development
 
 - Flask
 - Python
