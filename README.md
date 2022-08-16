@@ -36,5 +36,6 @@ This project uses 260 images of skin lesions to train a neural network. This cod
 ### Web Development
 
 - Flask
-- Python
-- HTML-5
+- Javascript
+- HTML
+- CSS
